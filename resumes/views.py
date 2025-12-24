@@ -21,11 +21,18 @@ def match_jobs(skills, experience):
     matched_jobs = []
     jobs = Job.objects.all()
 
+    # normalize resume skills
+    resume_skills = [skill.strip().lower() for skill in skills]
+
     for job in jobs:
-        job_skills = job.required_skills.lower().split(',')
-        if any(skill in job_skills for skill in skills):
-            if experience >= job.min_experience:
-                matched_jobs.append(job)
+        job_skills = [s.strip().lower() for s in job.required_skills.split(',')]
+
+        # check skill match
+        skill_match = set(resume_skills) & set(job_skills)
+
+        # check experience match
+        if skill_match and experience >= job.min_experience:
+            matched_jobs.append(job)
 
     return matched_jobs
 
