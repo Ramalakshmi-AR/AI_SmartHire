@@ -23,7 +23,10 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-u0bg4q3wf_+f$8i#qc9ot5&f1zt$6p+2)ky_!str7zya$2mpx2'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+import os
+
+DEBUG = os.getenv("DEBUG", "False") == "True"
+
 
 ALLOWED_HOSTS = [
     'ai-smarthire.onrender.com',
