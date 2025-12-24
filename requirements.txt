@@ -1,0 +1,3 @@
+Django
+PyPDF2
+django-widget-tweaks

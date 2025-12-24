@@ -1,0 +1,155 @@
+{% load widget_tweaks %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>SmartHire | Resume Submission</title>
+
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <style>
+        body {
+            background: linear-gradient(135deg, #e3f2fd, #bbdefb);
+            min-height: 100vh;
+        }
+        .form-card {
+            border-radius: 16px;
+        }
+        .form-header {
+            background-color: #1e88e5;
+            color: white;
+            border-radius: 16px 16px 0 0;
+            padding: 20px;
+            text-align: center;
+        }
+        .btn-primary {
+            background-color: #1e88e5;
+            border: none;
+        }
+        .btn-primary:hover {
+            background-color: #1565c0;
+        }
+        label {
+            font-weight: 500;
+        }
+    </style>
+</head>
+<body>
+
+<nav class="navbar navbar-dark" style="background-color:#1565c0;">
+    <div class="container-fluid">
+        <span class="navbar-brand">SmartHire</span>
+    </div>
+</nav>
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-7 col-lg-6">
+
+            <div class="card shadow form-card">
+                <div class="form-header">
+                    <h4 class="mb-0">Resume Screening & Job Recommendation</h4>
+                    <small>Submit your resume for AI-based evaluation</small>
+                </div>
+
+                <div class="card-body p-4">
+
+                    <form method="POST" enctype="multipart/form-data">
+                        {% csrf_token %}
+
+
+                       
+    {% if form.errors %}
+    <div class="alert alert-danger">
+        <strong>Please fix the following errors:</strong>
+        {{ form.errors }}
+    </div>
+    {% endif %}
+                        <!-- Full Name -->
+                        <div class="mb-3">
+                            <label class="form-label">Full Name</label>
+                            {{ form.name|add_class:"form-control" }}
+                        <!-- </div>
+                        <div class="mb-3">
+    <label class="form-label">Full Name</label>
+    {{ form.name|add_class:"form-control" }}
+    {% if form.name.errors %}
+        <div class="text-danger small">{{ form.name.errors }}</div>
+    {% endif %}
+</div> -->
+
+
+                        <!-- Email -->
+                        <div class="mb-3">
+                            <label class="form-label">Email Address</label>
+                            {{ form.email|add_class:"form-control" }}
+                        </div>
+                        <!-- <div class="mb-3">
+    <label class="form-label">Email Address</label>
+    {{ form.email|add_class:"form-control" }}
+    {% if form.email.errors %}
+        <div class="text-danger small">{{ form.email.errors }}</div>
+    {% endif %}
+</div> -->
+
+                        <!-- Experience -->
+                        <div class="mb-3">
+                            <label class="form-label">Years of Experience</label>
+                            {{ form.experience|add_class:"form-control" }}
+                        </div>
+                        <!-- <div class="mb-3">
+    <label class="form-label">Years of Experience</label>
+    {{ form.experience|add_class:"form-control" }}
+    {% if form.experience.errors %}
+        <div class="text-danger small">{{ form.experience.errors }}</div>
+    {% endif %}
+</div> -->
+
+                        <!-- Resume Upload -->
+                        <div class="mb-4">
+                            <label class="form-label">Upload Resume (PDF only)</label>
+                            {{ form.uploaded_file|add_class:"form-control" }}
+                        </div>
+                        <!-- <div class="mb-4">
+    <label class="form-label">Upload Resume (PDF only)</label>
+    {{ form.uploaded_file|add_class:"form-control" }}
+    {% if form.uploaded_file.errors %}
+        <div class="text-danger small">{{ form.uploaded_file.errors }}</div>
+    {% endif %}
+</div> -->
+
+<div id="loading" class="text-center mt-3" style="display:none;">
+    <div class="spinner-border text-primary" role="status"></div>
+    <p class="mt-2">Analyzing resume, please wait...</p>
+</div>
+
+
+                        <div class="d-grid">
+                            <button type="submit" class="btn btn-primary btn-lg" onclick="showLoader()">
+    Submit & Analyze Resume
+</button>
+
+                        </div>
+
+                    </form>
+
+                </div>
+            </div>
+
+            <p class="text-center text-muted mt-3">
+                Your data is secure and used only for job matching
+            </p>
+
+        </div>
+    </div>
+</div>
+
+<script>
+function showLoader() {
+    document.getElementById('loading').style.display = 'block';
+}
+</script>
+
+</body>
+</html>
